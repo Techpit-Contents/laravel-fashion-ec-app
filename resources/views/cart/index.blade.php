@@ -38,7 +38,7 @@
         @endforeach
     </div>
     <div class="cart__sub-total">
-        小計：￥{{ number_format($total_price) }} 円
+        小計：￥{{ number_format($total_price) }}
     </div>
     @else
     <div class="cart__empty">
