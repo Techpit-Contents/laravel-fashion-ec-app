@@ -11061,6 +11061,10 @@ a.text-dark:focus {
   letter-spacing: 1px;
 }
 
+.cart__purchase {
+  margin-top: 24px;
+}
+
 .cart__empty {
   font-size: 16px;
   color: #4a4a4a;
