@@ -16,7 +16,7 @@ class LineItemController extends Controller
             ->first();
 
         if ($line_item) {
-            $line_item->quantity += $item->input('quantity');
+            $line_item->quantity += $request->input('quantity');
             $line_item->save();
         } else {
             LineItem::create([
