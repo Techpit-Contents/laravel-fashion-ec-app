@@ -36,11 +36,15 @@ class CartController extends Controller
         $line_items = [];
         foreach ($cart->products as $product) {
             $line_item = [
-                'name'        => $product->name,
-                'description' => $product->description,
-                'amount'      => $product->price,
-                'currency'    => 'jpy',
-                'quantity'    => $product->pivot->quantity,
+                'price_data' => [
+                    'currency' => 'jpy',
+                    'unit_amount' => $product->price,
+                    'product_data' => [
+                      'name' => $product->name,
+                      'description' => $product->description,
+                    ],
+                  ],
+                  'quantity'    => $product->pivot->quantity,
             ];
             array_push($line_items, $line_item);
         }
@@ -50,8 +54,9 @@ class CartController extends Controller
         $session = \Stripe\Checkout\Session::create([
             'payment_method_types' => ['card'],
             'line_items'           => [$line_items],
-            'success_url'     => route('cart.success'),
+            'success_url'          => route('cart.success'),
             'cancel_url'           => route('cart.index'),
+            'mode'                 => 'payment',
         ]);
 
         return view('cart.checkout', [
